@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [ ! -f /tmp/foo.txt ]; then
     touch .todo.txt
 fi
@@ -15,5 +14,11 @@ cat -n .todo.txt
 fi
 
 if [ $1 = -d ]; then
-sed -i '' $2"d" .todo.txt
+uname=`uname`
+    if [ $uname = 'Darwin' ]; then
+        sed -i '' $2"d" .todo.txt
+    fi
+    if [ $uname = 'Linux' ]; then
+        sed -i $2"d" .todo.txt
+    fi
 fi
